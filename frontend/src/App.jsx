@@ -2,7 +2,7 @@ import { WagmiConfig, createConfig, mainnet } from "wagmi";
 import { createPublicClient, http } from "viem";
 import Profile from "./components/Profile";
 import Header from "./components/Header";
-import Categories from "./components/Categories";
+import Write from "./pages/Write";
 
 const config = createConfig({
   autoConnect: true,
@@ -51,6 +51,8 @@ export default function App() {
       >
         Sign
       </button>
+
+      <Write />
     </>
   );
 }
