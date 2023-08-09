@@ -1,9 +1,19 @@
-import React from 'react'
+import { WagmiConfig, createConfig, mainnet } from 'wagmi'
+import { createPublicClient, http } from 'viem'
+import Profile from "./components/Profile"
 
-function App() {
+const config = createConfig({
+  autoConnect: true,
+  publicClient: createPublicClient({
+    chain: mainnet,
+    transport: http()
+  }),
+})
+
+export default function App() {
   return (
-    <div className='bg-black'>App</div>
+    <WagmiConfig config={config}>
+      <Profile />
+    </WagmiConfig>
   )
 }
-
-export default App
