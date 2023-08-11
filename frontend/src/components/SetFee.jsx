@@ -13,7 +13,10 @@ export default function SetFee() {
   };
 
   return (
-    <div className="p-4">
+    <div
+      className="rounded-box bg-red-100 p-4 flex"
+      style={{ width: "calc(25% + 8px)", marginLeft: "25%" }}
+    >
       <h2 className="text-xl font-semibold mb-4">Set Fee</h2>
       <div className="space-y-2">
         <label className="block font-medium">
