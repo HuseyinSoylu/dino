@@ -10,14 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "ethers": "5.7.2",
     "iron-session": "^6.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-quill": "^2.0.0",
-    "react-router-dom": "^6.14.2",
+    "react-router-dom": "^6.15.0",
     "siwe": "^2.1.4",
     "viem": "^1.5.4",
-    "wagmi": "^1.3.9"
+    "web3": "^4.0.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
