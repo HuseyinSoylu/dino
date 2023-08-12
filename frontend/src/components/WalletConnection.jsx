@@ -12,6 +12,7 @@ function WalletConnection() {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const connectWalletHandler = async () => {
+
     try {
       if (window.ethereum) {
         await window.ethereum.enable();
