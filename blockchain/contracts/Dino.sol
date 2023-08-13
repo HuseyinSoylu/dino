@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract HashedArticleStorage is ERC721, Ownable {
-    mapping(uint256 => bytes32) private articleHashes;
+    mapping(uint256 => string) private articleHashes; // Changed to string
     mapping(address => bool) private hasPurchased;
     uint256 private articleCount;
     uint256 public publishingFee; // Fee in wei
@@ -18,7 +18,7 @@ contract HashedArticleStorage is ERC721, Ownable {
         publishingFee = fee;
     }
 
-    function publishArticle(bytes32 articleHash) public payable {
+    function publishArticle(string memory articleHash) public payable { // Changed bytes32 to string
         require(msg.value >= publishingFee, "Insufficient payment");
 
         articleCount++;
@@ -38,7 +38,7 @@ contract HashedArticleStorage is ERC721, Ownable {
         _safeTransfer(owner, msg.sender, tokenId, "");
     }
 
-    function getArticleHash(uint256 tokenId) public view returns (bytes32) {
+    function getArticleHash(uint256 tokenId) public view returns (string memory) { // Changed bytes32 to string
         require(_exists(tokenId), "Token does not exist");
         return articleHashes[tokenId];
     }
@@ -48,5 +48,5 @@ contract HashedArticleStorage is ERC721, Ownable {
         payable(owner()).transfer(balance);
     }
 
-    // Diğer işlevler...
+    // Other functions...
 }
