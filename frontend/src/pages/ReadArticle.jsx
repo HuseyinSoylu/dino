@@ -11,12 +11,18 @@ import {
   infuraProjectId,
 } from '../utils/constants.js';
 import axios from 'axios';
+import Modal from 'react-modal';
+
+import ArticleModal from '../components/ArticleModal'; // ArticleModal bileşenini ekleyin
 
 const ReadArticlePage = () => {
   const [latestArticleNumber, setLatestArticleNumber] =
     useState(null);
   const [articleData, setArticleData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
+
+  const [showModal, setShowModal] = useState(false); // Modal gösterme durumu
+  const [selectedArticleText, setSelectedArticleText] = useState(''); // Seçilen makale metni
 
   const [categories, setCategories] = useState([
     { id: 1, name: 'Technology' },
@@ -38,8 +44,19 @@ const ReadArticlePage = () => {
     fetchArticleDetails();
   }, []);
 
+  const openModal = (articleText) => {
+    setSelectedArticleText(articleText);
+    setShowModal(true);
+  };
+
+  // Modalı kapatmak için bu fonksiyonu kullanın
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   const fetchArticleDetails = async () => {
     console.log('geldi');
+
     try {
       const fetchedArticleData = [];
       console.log('2');
@@ -87,7 +104,6 @@ const ReadArticlePage = () => {
                 Category: <b>{article.articleDetails.category}</b> |
                 Price: <b>{article.articleDetails.price} ETH</b>
               </p>
-              <p>{article.articleDetails.text}</p>
               <button
                 className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
                 onClick={() =>
@@ -99,6 +115,36 @@ const ReadArticlePage = () => {
               >
                 Buy
               </button>
+
+              {localStorage.getItem('purchasedId') ===
+                String(article.tokenId) && (
+                <button
+                  className="bg-blue-500 text-white px-2 py-1 rounded mt-2"
+                  onClick={() =>
+                    openModal(article.articleDetails.text)
+                  }
+                >
+                  Show Article
+                </button>
+              )}
+
+              {showModal && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                  <div className="bg-white p-6 rounded-lg shadow-md">
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: selectedArticleText,
+                      }}
+                    />
+                    <button
+                      className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+                      onClick={closeModal}
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -123,6 +169,11 @@ const ReadArticlePage = () => {
           </ul>
         </div>
       </div>
+      <ArticleModal
+        isOpen={showModal}
+        closeModal={closeModal}
+        articleText={selectedArticleText}
+      />
     </div>
   );
 };

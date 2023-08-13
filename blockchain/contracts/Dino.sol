@@ -31,21 +31,21 @@ contract HashedArticleStorage is ERC721, Ownable {
         articlePrices[tokenId] = price;
     }
 
-    function purchaseArticle(uint256 tokenId) public payable {
-        require(!_exists(tokenId), "Article does not exist");
-        require(!hasPurchased[msg.sender], "Already purchased");
+  function purchaseArticle(uint256 tokenId, uint256 price) public payable {
+    require(!hasPurchased[msg.sender], "Already purchased");
 
-        hasPurchased[msg.sender] = true;
-        address owner = ownerOf(tokenId);
-        require(msg.value >= articlePrices[tokenId], "Insufficient payment"); // Use article price for payment check
-        payable(owner).transfer(articlePrices[tokenId]);
-        _safeTransfer(owner, msg.sender, tokenId, "");
-    }
+    hasPurchased[msg.sender] = true;
+    address owner = ownerOf(tokenId);
+    require(msg.value >= price, "Insufficient payment"); // Use the provided price for payment check
+    payable(owner).transfer(price);
+    _safeTransfer(owner, msg.sender, tokenId, "");
+}
 
     function getArticleHash(uint256 tokenId) public view returns (string memory) {
         require(_exists(tokenId), "Token does not exist");
         return articleHashes[tokenId];
     }
+
 
     function getLatestArticleNumber() public view returns (uint256) {
         return articleCount;

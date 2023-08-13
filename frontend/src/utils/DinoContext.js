@@ -102,7 +102,9 @@ export const purchaseArticle = async (tokenId, price) => {
 
     await tx.wait();
 
+    localStorage.setItem("purchasedId", tokenId);
     console.log('Article purchased successfully');
+
   } catch (error) {
     console.error('Error:', error);
     throw error;
