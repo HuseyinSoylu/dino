@@ -1,33 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import Header from '../components/Header';
+import React, { useState, useEffect } from "react";
+import Header from "../components/Header";
 import {
   getLatestArticleNumberFromContract,
   getArticleHashFromContract,
   purchaseArticle,
-} from '../utils/DinoContext';
+} from "../utils/DinoContext";
 import {
   MarketAddress,
   MarketAddressABI,
   infuraProjectId,
-} from '../utils/constants.js';
-import axios from 'axios';
-import Modal from 'react-modal';
+} from "../utils/constants.js";
+import axios from "axios";
+import Modal from "react-modal";
 
-import ArticleModal from '../components/ArticleModal'; // ArticleModal bileşenini ekleyin
+import ArticleModal from "../components/ArticleModal"; // ArticleModal bileşenini ekleyin
 
 const ReadArticlePage = () => {
-  const [latestArticleNumber, setLatestArticleNumber] =
-    useState(null);
+  const [latestArticleNumber, setLatestArticleNumber] = useState(null);
   const [articleData, setArticleData] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const [showModal, setShowModal] = useState(false); // Modal gösterme durumu
-  const [selectedArticleText, setSelectedArticleText] = useState(''); // Seçilen makale metni
+  const [selectedArticleText, setSelectedArticleText] = useState(""); // Seçilen makale metni
 
   const [categories, setCategories] = useState([
-    { id: 1, name: 'Technology' },
-    { id: 2, name: 'Food' },
-    { id: 3, name: 'Travel' },
+    { id: 1, name: "Technology" },
+    { id: 2, name: "Food" },
+    { id: 3, name: "Travel" },
   ]);
 
   useEffect(() => {
@@ -36,7 +35,7 @@ const ReadArticlePage = () => {
         const number = await getLatestArticleNumberFromContract();
         setLatestArticleNumber(number);
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     }
 
@@ -55,16 +54,9 @@ const ReadArticlePage = () => {
   };
 
   const fetchArticleDetails = async () => {
-    console.log('geldi');
-
     try {
       const fetchedArticleData = [];
-      console.log('2');
-      for (
-        let tokenId = 1;
-        tokenId <= latestArticleNumber;
-        tokenId++
-      ) {
+      for (let tokenId = 1; tokenId <= latestArticleNumber; tokenId++) {
         const articleHash = await getArticleHashFromContract(tokenId);
         console.log({ articleHash });
 
@@ -81,7 +73,7 @@ const ReadArticlePage = () => {
 
       setArticleData(fetchedArticleData);
     } catch (error) {
-      console.error('Error fetching article details:', error);
+      console.error("Error fetching article details:", error);
     }
   };
 
@@ -101,28 +93,23 @@ const ReadArticlePage = () => {
                 Article {article.tokenId}
               </h3>
               <p className="text-gray-600">
-                Category: <b>{article.articleDetails.category}</b> |
-                Price: <b>{article.articleDetails.price} ETH</b>
+                Category: <b>{article.articleDetails.category}</b> | Price:{" "}
+                <b>{article.articleDetails.price} ETH</b>
               </p>
               <button
                 className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
                 onClick={() =>
-                  purchaseArticle(
-                    article.tokenId,
-                    article.articleDetails.price
-                  )
+                  purchaseArticle(article.tokenId, article.articleDetails.price)
                 }
               >
                 Buy
               </button>
 
-              {localStorage.getItem('purchasedId') ===
+              {localStorage.getItem("purchasedId") ===
                 String(article.tokenId) && (
                 <button
                   className="bg-blue-500 text-white px-2 py-1 rounded mt-2"
-                  onClick={() =>
-                    openModal(article.articleDetails.text)
-                  }
+                  onClick={() => openModal(article.articleDetails.text)}
                 >
                   Show Article
                 </button>
@@ -159,8 +146,8 @@ const ReadArticlePage = () => {
                 onClick={() => setSelectedCategory(category.name)}
                 className={`cursor-pointer rounded-md p-2 mb-2 ${
                   selectedCategory === category.name
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-gray-200 text-gray-700'
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 text-gray-700"
                 }`}
               >
                 {category.name}
