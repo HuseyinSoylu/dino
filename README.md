@@ -1,4 +1,3 @@
-
 # Dino: Empowering Content Creation with Optimism Network
 
 "Dino" is a groundbreaking web3 platform built on the Optimism network that empowers users to create and publish their own thought-provoking essays and articles. By leveraging the power of blockchain technology, Dino introduces a new paradigm of content creation and consumption. Authors can craft engaging and insightful content, while readers gain access to valuable, high-quality articles by paying a custom fee.
@@ -9,8 +8,8 @@ Authors on Dino have the creative freedom to produce captivating essays and arti
 
 Readers who wish to read an article pay a small fee using cryptocurrency on the Optimism network. This payment model not only supports authors' hard work but also provides readers with exclusive access to quality content. As a decentralized platform, Dino ensures transparency and fairness in revenue distribution, granting authors the opportunity to be recognized and rewarded for their contributions.
 
-
 ### Why Optimism Network
+
 The decision to build Dino on the Optimism network brings several benefits to the project:
 
 **Scalability:** Optimism's Optimistic Rollup solution offers unparalleled scalability, reducing congestion and transaction costs. This is crucial for accommodating a global user base.
@@ -25,7 +24,6 @@ The decision to build Dino on the Optimism network brings several benefits to th
 
 **Ecosystem Integration:** Building on Optimism connects Dino with a growing network of layer 2 projects, fostering collaboration and innovation.
 
-
 ### Who It's For:
 
 **Authors and Writers:** Dino is designed for aspiring and established writers who want to share their expertise, insights, and creativity with a global audience. It provides them with a platform to monetize their content while building a dedicated readership.
@@ -38,14 +36,17 @@ The decision to build Dino on the Optimism network brings several benefits to th
 
 In summary, Dino transforms content creation and consumption by harnessing the capabilities of blockchain. It empowers writers to earn from their work, fosters a community of passionate readers, and paves the way for a new era of online content where quality and innovation are celebrated and rewarded.
 
+## Screenshots
 
+![App Screenshot](https://i.imgur.com/k3ZhEVv.png)
+![App Screenshot](https://i.imgur.com/dqweV8M.png)
+![App Screenshot](https://i.imgur.com/db0MnZf.png)
+![App Screenshot](https://i.imgur.com/kPfZ0dW.png)
 
 ## Authors
 
 - [@huseyinsoylu](https://github.com/HuseyinSoylu)
 - [@yarencetinkaya](https://github.com/yarencetinkaya)
-
-
 
 ## Installation
 
@@ -57,10 +58,8 @@ Install Dino with yarn, use these commands:
 
 ```
 
-
 ```bash
   yarn install
   yarn dev
 
 ```
-    
