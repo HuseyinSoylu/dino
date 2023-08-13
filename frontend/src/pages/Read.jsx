@@ -5,6 +5,7 @@ import 'daisyui/dist/full.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import axios from 'axios';
+import { publishArticle } from '../utils/DinoContext';
 
 export default function ContentPage() {
   const [text, setText] = useState('');
@@ -54,6 +55,14 @@ export default function ContentPage() {
       );
 
       console.log('IPFS CID Hash:', response.data.IpfsHash);
+
+      try {
+        await publishArticle(
+          response.data.IpfsHash,
+          price,
+          1000000000000000
+        );
+      } catch (error) {}
     } catch (error) {
       console.error('Error pinning to IPFS:', error);
     }

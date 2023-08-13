@@ -2,7 +2,10 @@
 //         Connect Wallet
 //       </button>
 
- import marketAbi from "./abi.json";
+import marketAbi from './abi.json';
 
-export const MarketAddress = "0xb074dD37570f9512Abb996844f2eA2bC24dE0d52";
+export const MarketAddress =
+  '0x4D4aeB28B146F889808082DD0c159bD43Cbc2a38';
 export const MarketAddressABI = marketAbi;
+
+export const infuraProjectId = '5e38499cc0dc41bf8c52ed42cc26e75b';
