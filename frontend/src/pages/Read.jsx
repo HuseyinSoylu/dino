@@ -4,6 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import 'daisyui/dist/full.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import axios from 'axios';
 
 export default function ContentPage() {
   const [text, setText] = useState('');
@@ -28,7 +29,7 @@ export default function ContentPage() {
     setPrice(''); // Reset price when toggling
   };
 
-  const handlePublish = () => {
+  const handlePublish = async () => {
     const data = {
       text: text,
       category: selectedCategory,
@@ -37,6 +38,25 @@ export default function ContentPage() {
 
     const jsonData = JSON.stringify(data, null, 2);
     console.log(jsonData);
+
+    try {
+      const response = await axios.post(
+        'https://api.pinata.cloud/pinning/pinJSONToIPFS',
+        data,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            pinata_api_key: 'd80f9c052e827f184f44', // Replace with your Pinata API Key
+            pinata_secret_api_key:
+              'b00140bc712603c653df4464d290b52bea40ef06c99290475bbb32bfb94cee54', // Replace with your Pinata Secret API Key
+          },
+        }
+      );
+
+      console.log('IPFS CID Hash:', response.data.IpfsHash);
+    } catch (error) {
+      console.error('Error pinning to IPFS:', error);
+    }
   };
 
   return (
